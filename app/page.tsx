@@ -9,8 +9,12 @@ import {
   TreePine,
 } from 'lucide-react';
 
+export const dynamic = 'force-static';
+
 const phoneDisplay = '07796 872642';
 const phoneHref = 'tel:+447796872642';
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+const asset = (path: string) => `${basePath}${path}`;
 
 const services = [
   { number: '01', icon: TreePine, title: 'Tree surgery', text: 'Careful reductions, pruning, pollarding and dismantling for trees of all sizes.', items: ['Tree reductions', 'Sectional dismantling', 'Deadwood removal'] },
@@ -41,8 +45,7 @@ export default function Home() {
       <header className="site-header">
         <div className="shell nav-wrap">
           <a className="brand" href="#top" aria-label="C and J Landscaping and Trees home">
-            <span className="brand-mark" aria-hidden="true"><TreePine size={26} /></span>
-            <span className="brand-name"><strong>C&amp;J</strong><small>Landscaping &amp; Trees</small></span>
+            <img className="brand-logo" src={asset('/cj-logo.png')} alt="C&J Landscaping & Trees, Toddington" />
           </a>
           <nav aria-label="Main navigation">
             <a href="#services">Services</a><a href="#work">Our work</a><a href="#about">About</a><a href="#quote">Get a quote</a>
@@ -68,12 +71,12 @@ export default function Home() {
             </div>
           </div>
           <div className="hero-visual">
-            <figure className="hero-photo"><img src="/work/hero-tree.png" alt="Tree work being carried out at height in Toddington" /></figure>
+            <figure className="hero-photo"><img src={asset('/work/hero-tree.png')} alt="Tree work being carried out at height in Toddington" /></figure>
             <div className="hero-note"><span>Current work</span><strong>Tree reduction<br />&amp; branch removal</strong></div>
             <div className="tree-ring" aria-hidden="true"><span /><span /><span /></div>
           </div>
         </div>
-        <div className="hero-ticker" aria-hidden="true"><div>PRUNING <span>✦</span> TREE REMOVAL <span>✦</span> HEDGE CUTTING <span>✦</span> GARDEN CLEARANCE <span>✦</span> PRUNING <span>✦</span></div></div>
+        <div className="hero-ticker" aria-hidden="true"><div className="ticker-inner shell">PRUNING <span>✦</span> TREE REMOVAL <span>✦</span> HEDGE CUTTING <span>✦</span> GARDEN CLEARANCE <span>✦</span> PRUNING <span>✦</span></div></div>
       </section>
 
       <section className="services section shell" id="services">
@@ -102,7 +105,7 @@ export default function Home() {
           <div className="gallery">
             {gallery.map(([src, alt, label], index) => (
               <figure className={`gallery-item item-${index + 1}`} key={src}>
-                <img src={src} alt={alt} loading={index < 2 ? 'eager' : 'lazy'} />
+                <img src={asset(src)} alt={alt} loading={index < 2 ? 'eager' : 'lazy'} />
                 <figcaption><span>0{index + 1}</span>{label}</figcaption>
               </figure>
             ))}
@@ -111,7 +114,7 @@ export default function Home() {
       </section>
 
       <section className="about section shell" id="about">
-        <div className="about-image"><img src="/work/ground-work.png" alt="C and J Landscaping and Trees team member working on a garden" loading="lazy" /><span>Local. Hands-on. Reliable.</span></div>
+        <div className="about-image"><img src={asset('/work/ground-work.png')} alt="C and J Landscaping and Trees team member working on a garden" loading="lazy" /><span>Local. Hands-on. Reliable.</span></div>
         <div className="about-copy">
           <p className="eyebrow dark"><span /> C&amp;J Landscaping &amp; Trees</p>
           <h2>A straightforward local service.</h2>
@@ -151,7 +154,7 @@ export default function Home() {
 
       <footer>
         <div className="shell footer-grid">
-          <a className="brand footer-brand" href="#top"><span className="brand-mark"><TreePine size={26} /></span><span className="brand-name"><strong>C&amp;J</strong><small>Landscaping &amp; Trees</small></span></a>
+          <a className="brand footer-brand" href="#top"><img className="brand-logo" src={asset('/cj-logo.png')} alt="C&J Landscaping & Trees, Toddington" /></a>
           <p>Tree surgery, hedge care and garden clearances around Toddington and Dunstable.</p>
           <div><a href={phoneHref}>{phoneDisplay}</a><span>Open 24 hours</span></div>
         </div>
